@@ -10,7 +10,7 @@ namespace Kardasz\Swiftmailer\Transport;
 use SendGrid;
 use SendGrid\Mail\Mail;
 use Swift_Events_EventListener;
-use Swift_Mime_SimpleMessage;
+use Swift_Mime_Message;
 use Swift_Transport;
 use Swift_Events_SendEvent;
 use Swift_Events_EventDispatcher;
@@ -90,7 +90,7 @@ class SendGridTransport implements Swift_Transport
      * {@inheritDoc}
      * @throws SendGridTransportException
      */
-    public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
+    public function send(Swift_Mime_Message $message, &$failedRecipients = null)
     {
         if ($evt = $this->eventDispatcher->createSendEvent($this, $message)) {
             $this->eventDispatcher->dispatchEvent($evt, 'beforeSendPerformed');
